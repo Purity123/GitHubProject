@@ -36,8 +36,14 @@ public class App {
 			student1.setAge(25);
 			ksession.insert(student1);
 
-			/* 执行所有的规则 与事实进行匹配 */
-			ksession.fireAllRules();
+			/* 执行所有的规则 与事实进行匹配,如果匹配到几条规则，a就等于几 */
+			int a = ksession.fireAllRules();
+			if (a > 0) {
+				System.out.println(a);
+				System.out.println(student.getResponses());
+				System.out.println(student1.getResponses());
+			}
+			
 		} finally {
 			/* 关闭会话 */
 			ksession.dispose();
