@@ -1,0 +1,19 @@
+
+import com.hundsun.bean.Student
+
+rule "A"
+ //条件Conditions即LHS（left hand side）
+ when
+  Student(age<=18);
+  //结果Actions即RHS（right hand side或者consequence）
+ then 
+  System.out.println("未成年人");
+                    
+end
+
+rule "B"
+ when
+  Student(age>20,age<=30);
+ then
+  System.out.println("已经二十多岁了");
+end
