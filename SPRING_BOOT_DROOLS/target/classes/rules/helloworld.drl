@@ -1,0 +1,30 @@
+package com.hs.drools.demo.rules;
+
+import com.hs.drools.demo.bean.MessageBean;
+
+dialect  "mvel"
+
+rule "Hello World"
+
+    dialect "mvel"
+
+    when
+        m : MessageBean(status.equals(MessageBean.HELLO),message : message)
+    then
+        System.out.println(message);
+
+    modify(m){message = "Goodbye crule world",status = MessageBean.GOODBYE};
+
+end
+
+
+rule  "Good Bye"
+
+    dialect "java"
+
+    when
+        MessageBean(status == MessageBean.GOODBYE,message : message)
+    then
+        System.out.println(message);
+
+end

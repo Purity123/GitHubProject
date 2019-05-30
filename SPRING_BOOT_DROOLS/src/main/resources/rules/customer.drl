@@ -1,0 +1,19 @@
+package rules;
+
+import com.hs.drools.demo.bean.CustomerBean
+import com.hs.drools.demo.bean.PayInfoBean
+
+dialect "mvel"
+
+rule "Change user level by Payinfo"
+    no-loop true
+    when
+        $customer : CustomerBean();
+        payInfo : PayInfoBean( cashAmount >= 1000.00,status == 2,type == 2,userId == $customer.id );
+    then
+        System.out.println("修改用户： " + $customer.getUserName());
+        modify($customer){
+            setLev(1)
+        }
+        System.out.println("修改后的用户级别为：" + $customer.getLev());
+end

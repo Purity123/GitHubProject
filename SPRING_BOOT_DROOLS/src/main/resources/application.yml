@@ -1,0 +1,63 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: DROOLS DEMO
+  datasource:
+    username: root
+    password: hsfund
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/activiti?characterEncoding=utf-8
+    initial-size: 5
+    max-active: 20
+    max-idle: 8
+    min-idle: 3
+    max-wait: 500
+
+    #是否自动回收超时连接
+    remove-abandoned: true
+    remove-abandoned-timeout: 180
+    #有些数据库连接的时候有超时限制（mysql连接在8小时后断开）
+    #或者由于网络中断等原因出现链接失效的情况
+    #设置一个testWhileIdle参数为true，可以保证连接池内部定时检测连接的可用性
+    #不可用的连接会被抛弃或者重建，最大情况的保证从连接池中得到的Connection对象是可用的。
+    test-while-idle: true
+    ##验证
+    validation-query: SELECT 1
+    validation-query-timeout: 1
+    ##每隔五分钟检测空闲超过1分钟的连接,并物理释放
+    min-evictable-idle-time-millis: 60000
+    ##链接在连接池中最小生存时间
+    time-between-eviction-runs-millis: 300000
+    ## Validate the connection before borrowing it from the pool.
+    test-on-borrow: true
+    num-tests-per-eviction-run: 20
+
+  jpa:
+     show-sql: true
+     hibernate:
+       ddl-auto: update
+       properties:
+       hibernate:
+          dialect: org.hibernate.dialect.MySQL5Dialect
+          format_sql: true
+          use_sql_comments: true
+
+#mybatis 配置
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+
+#系统信息配置
+system:
+  #异常配置项
+  exception:
+    default-errorCode: 10000
+    default-error-info: 系统罢工了,请等会再来
+    default-status: 500
+    ######扫描包路径,当 出现运行时异常时,提取此包下的堆栈信息,方便开发人员定位具体错误代码行###########
+    basePackages: com.hs.oauth.tools
+    ######异常错误号前缀配置,分为数据绑定,业务,系统 3类异常#######
+    bind-exception-prefix: BIND-
+    biz-exception-prefix: BIZ-
+    system-exception-prefix: SYS-
