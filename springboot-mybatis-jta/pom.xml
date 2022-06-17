@@ -25,7 +25,7 @@
 
 		<!--一些工具jar-->
 		<commons-lang3.version>3.4</commons-lang3.version>
-		<fastjson.version>1.2.35</fastjson.version>
+		<fastjson.version>1.2.83</fastjson.version>
 		<jsch.version>0.1.54</jsch.version>
 		<hutool-all.version>3.1.1</hutool-all.version>
 
